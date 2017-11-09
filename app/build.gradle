@@ -25,6 +25,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.github.aakira:expandable-layout:1.4.2@aar' // for expandable layout
+    compile 'com.squareup.okhttp3:okhttp:3.9.0' // for okhttp3
 
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
