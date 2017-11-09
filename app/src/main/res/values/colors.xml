@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#548235</color>
     <color name="colorAccent">#548235</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="doorbell_ignore_btn">#A9C09A</color>
+    <color name="doorbell_open_btn">#702E48</color>
 </resources>

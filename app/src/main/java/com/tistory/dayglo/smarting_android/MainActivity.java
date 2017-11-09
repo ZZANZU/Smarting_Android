@@ -1,13 +1,16 @@
 package com.tistory.dayglo.smarting_android;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
     ExpandableRelativeLayout doorbellLayout, temperatureLayout, trashLayout;
+    ImageView visitorImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         doorbellLayout = (ExpandableRelativeLayout) findViewById(R.id.doorbell_layout);
         temperatureLayout = (ExpandableRelativeLayout) findViewById(R.id.temperature_layout);
         trashLayout = (ExpandableRelativeLayout) findViewById(R.id.trash_layout);
+
+        visitorImage = (ImageView) findViewById(R.id.visitor_photo);
 
 
     }
