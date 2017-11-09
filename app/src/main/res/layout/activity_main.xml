@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tistory.dayglo.smarting_android.MainActivity">
+    tools:context="com.tistory.dayglo.smarting_android.MainActivity"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <!--doorbell layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:onClick="onClickDoorbell">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doorbell layout"
+            />
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/doorbell_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_duration="1000"
+            app:ael_expanded="false"
+            app:ael_interpolator="bounce"
+            app:ael_orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:text="Doorbell layout"
+                />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    </LinearLayout>
+
+    <!--temperature layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:onClick="onClickTemperature">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature layout"
+            />
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/temperature_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:ael_duration="1000"
+            app:ael_expanded="false"
+            app:ael_interpolator="bounce"
+            app:ael_orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:text="Temperature layout"
+                />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    </LinearLayout>
+
+    <!--trash can layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:onClick="onClickTrashCan">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trash Can layout"
+            />
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/trash_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_duration="1000"
+            app:ael_expanded="false"
+            app:ael_interpolator="bounce"
+            app:ael_orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:text="Trash Can layout"
+                />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
