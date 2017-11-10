@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     ExpandableRelativeLayout doorbellLayout, temperatureLayout, trashLayout;
     ImageView visitorImage;
 
+    private static final String ispressedUrl = "http://13.59.174.162:7579/ispressed";
+    private static final String temperatureUrl = "http:/13.59.174.162:7579/temperature";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
         visitorImage = (ImageView) findViewById(R.id.visitor_photo);
 
-        requestData();
+        requestData(ispressedUrl, callbackAfterGettingPressed);
 
     }
 
     public void onClickDoorbell(View view) {
         doorbellLayout.toggle();
-        requestData();
+
+        requestData(ispressedUrl, callbackAfterGettingPressed);
     }
 
     public void onClickTemperature(View view) {
@@ -56,20 +60,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO 2017-11-09 따로 파일 만들어서 import해와서 쓰기
-    private void requestData() {
+    private void requestData(String httpUrl, Callback callBack) {
         OkHttpClient client = new OkHttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.59.174.162:7579/ispressed").newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(httpUrl).newBuilder();
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
-        client.newCall(request).enqueue(callbackAfterGettingData);
+        client.newCall(request).enqueue(callBack);
     }
 
-    private Callback callbackAfterGettingData = new Callback() {
+    public Callback callbackAfterGettingPressed = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
             e.printStackTrace();
