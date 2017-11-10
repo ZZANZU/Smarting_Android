@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickDoorbell(View view) {
         doorbellLayout.toggle();
+        requestData();
     }
 
     public void onClickTemperature(View view) {
