@@ -134,7 +134,7 @@
             android:id="@+id/temperature_layout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:ael_duration="1000"
+            app:ael_duration="700"
             app:ael_expanded="false"
             app:ael_interpolator="bounce"
             app:ael_orientation="vertical"
@@ -144,7 +144,11 @@
                 android:id="@+id/temperature_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="400dp"
+                android:layout_centerInParent="true"
                 android:text="Temperature layout"
+                android:textSize="100dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 />
 
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
