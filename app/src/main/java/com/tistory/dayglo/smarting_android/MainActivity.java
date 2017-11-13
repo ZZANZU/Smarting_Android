@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO 2017-11-09 ButterKnife 적용
         doorbellLayout = (ExpandableRelativeLayout) findViewById(R.id.doorbell_layout);
         temperatureLayout = (ExpandableRelativeLayout) findViewById(R.id.temperature_layout);
-        trashLayout = (ExpandableRelativeLayout) findViewById(R.id.trash_layout);
 
         visitorImage = (ImageView) findViewById(R.id.visitor_photo);
 
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickTrashCan(View view) {
-        trashLayout.toggle();
+
     }
 
     // TODO 2017-11-09 따로 파일 만들어서 import해와서 쓰기
