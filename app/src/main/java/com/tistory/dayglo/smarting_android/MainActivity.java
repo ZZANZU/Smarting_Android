@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView visitorImage;
 
     private static final String ispressedUrl = "http://13.59.174.162:7579/ispressed";
-    private static final String temperatureUrl = "http:/13.59.174.162:7579/temperature";
+    private static final String temperatureUrl = "http://13.59.174.162:7579/temperature";
+    private static final String trashUrl = "http://13.59.174.162:7579/trash";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         requestData(ispressedUrl, callbackAfterGettingPressed);
         requestData(temperatureUrl, callbackAfterGettingTemperature);
+        requestData(trashUrl, callbackAfterGettingTrash);
 
     }
 
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickTrashCan(View view) {
-
+        requestData(trashUrl, callbackAfterGettingTrash);
     }
 
     // TODO 2017-11-09 따로 파일 만들어서 import해와서 쓰기
@@ -130,6 +134,65 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
 
+        }
+    };
+
+    // trash can 콜백
+    public Callback callbackAfterGettingTrash = new Callback() {
+
+        @Override
+        public void onFailure(Call call, IOException e) {
+            e.printStackTrace();
+            Log.d(TAG, "onFailure: trash callback fail");
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            } else {
+                final String responseData = response.body().string();
+                final int height = Math.round(Float.valueOf(responseData));
+                Log.d(TAG, String.valueOf(height));
+
+                // Run view-related code back on the main thread
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ImageView trashIcon = (ImageView) findViewById(R.id.trash_icon);
+                        ImageView trashBar = (ImageView) findViewById(R.id.trash_bar);
+                        TextView trashHeight = (TextView) findViewById(R.id.trash_percentage_textview);
+
+                        if(height < 25) {
+                            trashIcon.setImageResource(R.drawable.trash_icon_1);
+                            trashBar.setImageResource(R.drawable.trash_bar_1);
+                            trashHeight.setText(String.valueOf(height));
+                        } else if(25 <= height && height < 50) {
+                            trashIcon.setImageResource(R.drawable.trash_icon_2);
+                            trashBar.setImageResource(R.drawable.trash_bar_2);
+                            trashHeight.setText(String.valueOf(height));
+                        } else if(50 <= height && height < 75) {
+                            trashIcon.setImageResource(R.drawable.trash_icon_3);
+                            trashBar.setImageResource(R.drawable.trash_bar_3);
+                            trashHeight.setText(String.valueOf(height));
+                        } else if(75 <= height && height < 96) {
+                            trashIcon.setImageResource(R.drawable.trash_icon_4);
+                            trashBar.setImageResource(R.drawable.trash_bar_4);
+                            trashHeight.setText(String.valueOf(height));
+                        } else if(96 <= height && height <= 100){
+                            trashIcon.setImageResource(R.drawable.trash_icon_5);
+                            trashBar.setImageResource(R.drawable.trash_bar_5);
+                            trashHeight.setText(String.valueOf(height));
+                        } else {
+                            trashIcon.setImageResource(R.drawable.trash_icon_1);
+                            trashBar.setImageResource(R.drawable.trash_bar_1);
+                            trashHeight.setText("??");
+                        }
+
+
+                    }
+                });
+            }
         }
     };
 }
