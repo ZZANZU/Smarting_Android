@@ -156,41 +156,86 @@
     </LinearLayout>
 
     <!--trash can layout-->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:orientation="vertical"
         android:background="@drawable/rounded_corner"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
+        android:padding="0dp"
         android:onClick="onClickTrashCan"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trash Can layout"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@color/trash_background"
             />
 
-        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-            android:id="@+id/trash_layout"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:ael_duration="1000"
-            app:ael_expanded="false"
-            app:ael_interpolator="bounce"
-            app:ael_orientation="vertical"
+            android:layout_height="match_parent"
             >
+
+            <ImageView
+                android:id="@+id/trash_icon"
+                android:src="@drawable/trash_icon_1"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/trash_bar"
+                android:src="@drawable/trash_bar_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="19dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="115dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/trash_percentage_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="0dp"
+                android:text="00"
+                android:textSize="56dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="224dp"
+                android:layout_marginRight="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/trash_bar"
+                app:layout_constraintVertical_bias="0.666" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:text="Trash Can layout"
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:text="%"
+                android:textSize="32dp"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintLeft_toRightOf="@+id/trash_percentage_textview"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/trash_percentage_textview"
+                android:layout_marginBottom="8dp" />
 
-        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-    </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
