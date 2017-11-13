@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         visitorImage = (ImageView) findViewById(R.id.visitor_photo);
 
         requestData(ispressedUrl, callbackAfterGettingPressed);
+        requestData(temperatureUrl, callbackAfterGettingTemperature);
 
     }
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickTemperature(View view) {
         temperatureLayout.toggle();
+
+        requestData(temperatureUrl, callbackAfterGettingTemperature);
     }
 
     public void onClickTrashCan(View view) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         client.newCall(request).enqueue(callBack);
     }
 
+    // doorbell 콜백
     public Callback callbackAfterGettingPressed = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -93,6 +97,35 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         TextView tv = (TextView) findViewById(R.id.visit_time_textview);
+                        tv.setText(responseData);
+                    }
+                });
+            }
+
+        }
+    };
+
+    // temperature 콜백
+    public Callback callbackAfterGettingTemperature = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            e.printStackTrace();
+            Log.d(TAG, "onFailure: callback fail");
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            } else {
+                final String responseData = response.body().string();
+                Log.d(TAG, responseData);
+
+                // Run view-related code back on the main thread
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView tv = (TextView) findViewById(R.id.temperature_textview);
                         tv.setText(responseData);
                     }
                 });
