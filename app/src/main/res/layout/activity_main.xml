@@ -29,7 +29,8 @@
                 android:id="@+id/visitor_photo"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
-                android:src="@drawable/ic_account_circle" />
+                android:src="@drawable/ic_account_circle"
+                android:onClick="onClickVisitorImage"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
