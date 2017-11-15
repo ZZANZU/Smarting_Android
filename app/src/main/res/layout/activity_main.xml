@@ -78,7 +78,8 @@
                 android:id="@+id/visitor_photo"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
-                android:src="@drawable/ic_account_circle"
+                android:elevation="4dp"
+                android:src="@mipmap/visitor_photo"
                 android:onClick="onClickVisitorImage"/>
 
             <LinearLayout
@@ -220,6 +221,7 @@
             <ImageView
                 android:id="@+id/trash_icon"
                 android:src="@drawable/trash_icon_1"
+                android:elevation="4dp"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
                 app:layout_constraintBottom_toBottomOf="parent"
