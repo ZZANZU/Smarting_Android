@@ -6,8 +6,57 @@
     android:layout_height="match_parent"
     tools:context="com.tistory.dayglo.smarting_android.MainActivity"
     android:orientation="vertical"
-    android:paddingTop="4dp"
     >
+    
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/app_bar_color"
+        android:elevation="4dp"
+        android:layout_marginBottom="4dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="8dp"
+            >
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="52dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/app_bar_logo"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/app_bar_user_photo"
+                android:layout_marginRight="8dp"
+                android:text="Manager Eric"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:id="@+id/app_bar_user_photo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/app_bar_user_photo"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
 
     <!--doorbell layout-->
     <LinearLayout
@@ -29,7 +78,8 @@
                 android:id="@+id/visitor_photo"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
-                android:src="@drawable/ic_account_circle"
+                android:elevation="4dp"
+                android:src="@mipmap/visitor_photo"
                 android:onClick="onClickVisitorImage"/>
 
             <LinearLayout
@@ -171,6 +221,7 @@
             <ImageView
                 android:id="@+id/trash_icon"
                 android:src="@drawable/trash_icon_1"
+                android:elevation="4dp"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
                 app:layout_constraintBottom_toBottomOf="parent"
