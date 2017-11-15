@@ -1,5 +1,6 @@
 package com.tistory.dayglo.smarting_android;
 
+import android.content.DialogInterface;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -195,4 +196,24 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    public void onClickVisitorImage(View view) {
+        final WebViewDialog webViewDialog = new WebViewDialog(this);
+
+        webViewDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                // TODO 2017-11-14 로딩할 때 ProgressBar 추가
+            }
+        });
+
+        webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+
+            }
+        });
+
+        webViewDialog.show();
+    }
 }
