@@ -1,7 +1,6 @@
 package com.tistory.dayglo.smarting_android;
 
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
