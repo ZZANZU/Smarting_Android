@@ -137,7 +137,8 @@
                     android:background="@color/doorbell_ignore_btn"
                     android:text="IGNORE"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="onclickClose"/>
 
                 <Button
                     android:id="@+id/doorbell_open_btn"
@@ -148,7 +149,8 @@
                     android:background="@color/doorbell_open_btn"
                     android:text="OPEN"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="onClickOpen"/>
 
             </LinearLayout>
 
