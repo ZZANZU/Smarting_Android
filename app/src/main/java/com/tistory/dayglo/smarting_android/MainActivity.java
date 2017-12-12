@@ -14,6 +14,10 @@ import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -108,14 +112,32 @@ public class MainActivity extends AppCompatActivity {
                 throw new IOException("Unexpected code " + response);
             } else {
                 final String responseData = response.body().string();
-                Log.d(TAG, responseData);
+
 
                 // Run view-related code back on the main thread
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView tv = (TextView) findViewById(R.id.visit_time_textview);
-                        tv.setText(responseData);
+                        String dateData = responseData.replaceAll("\"","");
+//                        String dateData = responseData;
+                        Log.d(TAG, "dateData : " + dateData);
+
+                        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", java.util.Locale.getDefault());
+                        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초", java.util.Locale.getDefault());
+
+                        try {
+                            Date originalDate = originalFormat.parse(dateData);
+
+                            String newDate = newFormat.format(originalDate);
+
+                            TextView tv = (TextView) findViewById(R.id.visit_time_textview);
+                            tv.setText(newDate);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 });
             }
