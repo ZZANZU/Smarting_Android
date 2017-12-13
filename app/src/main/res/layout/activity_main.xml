@@ -90,6 +90,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/visitor_name_textivew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -354,8 +355,35 @@
                 app:layout_constraintLeft_toRightOf="@+id/trash_percentage_textview"
                 app:layout_constraintRight_toRightOf="parent" />
 
-
         </android.support.constraint.ConstraintLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/trash_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:ael_duration="700"
+            app:ael_expanded="false"
+            app:ael_interpolator="bounce"
+            app:ael_orientation="vertical"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LAST TIME EMPTIED"
+                    android:textStyle="bold"
+                    />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     </FrameLayout>
 

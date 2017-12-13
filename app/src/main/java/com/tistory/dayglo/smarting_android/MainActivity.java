@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 throw new IOException("Unexpected code " + response);
             } else {
                 final String responseData = response.body().string();
-
+                // TODO: 2017-12-12 JSON형태의 responseData 변수를 parsing해서 visitor 텍스트뷰와 visiting time 텍스트뷰에 setText하기
 
                 // Run view-related code back on the main thread
                 MainActivity.this.runOnUiThread(new Runnable() {
