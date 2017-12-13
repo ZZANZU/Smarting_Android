@@ -8,8 +8,8 @@
 
     <color name="app_bar_color">#87A771</color>
 
-    <color name="doorbell_ignore_btn">#A9C09A</color>
-    <color name="doorbell_open_btn">#702E48</color>
+    <color name="doorbell_ignore_btn">#702E48</color>
+    <color name="doorbell_open_btn">#A9C09A</color>
 
     <color name="trash_background">#87A771</color>
 </resources>
