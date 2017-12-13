@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -111,15 +113,30 @@ public class MainActivity extends AppCompatActivity {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             } else {
-                final String responseData = response.body().string();
+                // TODO: 2017-12-13 코드 정리 
+                String responseData = response.body().string(); // {date: "", visitor:""}
+                String visitor = null;
+                String visitTime = null;
 
+                try {
+                    // String 타입의 responseData를 JSON 타입으로 변환(굳이?)
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    // JSON key 데이터 추출
+                    visitor = jsonObject.getString("visitor");
+                    visitTime = jsonObject.getString("date");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 // Run view-related code back on the main thread
+                final String finalVisitTime = visitTime;
+                final String finalVisitor = visitor;
+
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String dateData = responseData.replaceAll("\"","");
-//                        String dateData = responseData;
+                        String dateData = finalVisitTime.replaceAll("\"","");
+
                         Log.d(TAG, "dateData : " + dateData);
 
                         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", java.util.Locale.getDefault());
@@ -130,8 +147,10 @@ public class MainActivity extends AppCompatActivity {
 
                             String newDate = newFormat.format(originalDate);
 
-                            TextView tv = (TextView) findViewById(R.id.visit_time_textview);
-                            tv.setText(newDate);
+                            TextView visitTimeTextView = (TextView) findViewById(R.id.visit_time_textview);
+                            TextView visitorTextView = (TextView) findViewById(R.id.visitor_name_textivew);
+                            visitTimeTextView.setText(newDate);
+                            visitorTextView.setText(finalVisitor);
 
                         } catch (ParseException e) {
                             e.printStackTrace();
