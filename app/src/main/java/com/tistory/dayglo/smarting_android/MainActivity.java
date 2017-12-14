@@ -210,44 +210,77 @@ public class MainActivity extends AppCompatActivity {
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             } else {
-                final String responseData = response.body().string();
-                final int height = Math.round(Float.valueOf(responseData));
-                Log.d(TAG, String.valueOf(height));
+                String responseData = response.body().string();
+                String emptiedTime = null;
+                int height = 0;
+
+                try {
+                    // String 타입의 responseData를 JSON 타입으로 변환(굳이?)
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    // JSON key 데이터 추출
+                    emptiedTime = jsonObject.getString("time");
+                    height = jsonObject.getInt("percentage");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//                final int height = Math.round(Float.valueOf(responseData));
+//                Log.d(TAG, String.valueOf(height));
 
                 // Run view-related code back on the main thread
+                final int finalHeight = height;
+                final String finalEmptiedTime = emptiedTime;
+
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d(TAG, "emptied time : " + finalEmptiedTime);
+
+                        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", java.util.Locale.getDefault());
+                        SimpleDateFormat newFormat = new SimpleDateFormat("MM월 dd일 HH시 mm분", java.util.Locale.getDefault());
+
+                        try {
+                            Date originalTime = originalFormat.parse(finalEmptiedTime);
+
+                            String newTime = newFormat.format(originalTime);
+
+                            TextView emptiedTimeTextView = (TextView) findViewById(R.id.trash_emptied_time_textview);
+                            emptiedTimeTextView.setText(newTime);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         ImageView trashIcon = (ImageView) findViewById(R.id.trash_icon);
                         ImageView trashBar = (ImageView) findViewById(R.id.trash_bar);
-                        TextView trashHeight = (TextView) findViewById(R.id.trash_percentage_textview);
+                        TextView trashHeightTextView = (TextView) findViewById(R.id.trash_percentage_textview);
 
-                        if(height < 25) {
+                        if(finalHeight < 25) {
                             trashIcon.setImageResource(R.drawable.trash_icon_1);
                             trashBar.setImageResource(R.drawable.trash_bar_1);
-                            trashHeight.setText(String.valueOf(height));
-                        } else if(25 <= height && height < 50) {
+                            trashHeightTextView.setText(String.valueOf(finalHeight));
+                        } else if(25 <= finalHeight && finalHeight < 50) {
                             trashIcon.setImageResource(R.drawable.trash_icon_2);
                             trashBar.setImageResource(R.drawable.trash_bar_2);
-                            trashHeight.setText(String.valueOf(height));
-                        } else if(50 <= height && height < 75) {
+                            trashHeightTextView.setText(String.valueOf(finalHeight));
+                        } else if(50 <= finalHeight && finalHeight < 75) {
                             trashIcon.setImageResource(R.drawable.trash_icon_3);
                             trashBar.setImageResource(R.drawable.trash_bar_3);
-                            trashHeight.setText(String.valueOf(height));
-                        } else if(75 <= height && height < 96) {
+                            trashHeightTextView.setText(String.valueOf(finalHeight));
+                        } else if(75 <= finalHeight && finalHeight < 96) {
                             trashIcon.setImageResource(R.drawable.trash_icon_4);
                             trashBar.setImageResource(R.drawable.trash_bar_4);
-                            trashHeight.setText(String.valueOf(height));
-                        } else if(96 <= height && height <= 100){
+                            trashHeightTextView.setText(String.valueOf(finalHeight));
+                        } else if(96 <= finalHeight && finalHeight <= 100){
                             trashIcon.setImageResource(R.drawable.trash_icon_5);
                             trashBar.setImageResource(R.drawable.trash_bar_5);
-                            trashHeight.setText(String.valueOf(height));
+                            trashHeightTextView.setText(String.valueOf(finalHeight));
                         } else {
                             trashIcon.setImageResource(R.drawable.trash_icon_1);
                             trashBar.setImageResource(R.drawable.trash_bar_1);
-                            trashHeight.setText("??");
+                            trashHeightTextView.setText("??");
                         }
-
 
                     }
                 });
